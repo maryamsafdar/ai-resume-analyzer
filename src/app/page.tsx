@@ -1,4 +1,4 @@
-// frontend/pages/index.tsx
+// pages/index.tsx
 "use client";
 
 import { useState } from "react";
@@ -7,52 +7,37 @@ import UploadBox from "./frontend/components/UploadBox";
 import ResumeSummary from "./frontend/components/ResumeSummary";
 
 
-interface ResumeResult {
-  summary: string;
-  suggestions: string;
-  job_titles: string;
-}
-
 export default function Home() {
+  const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<ResumeResult | null>(null);
-  const [error, setError] = useState("");
 
   const handleUpload = async (file: File) => {
     setLoading(true);
-    setError("");
-    setResult(null);
-
     const formData = new FormData();
     formData.append("file", file);
 
-    try {
-      const res = await axios.post("http://localhost:8000/upload", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-
-      setResult(res.data);
-    } catch (err) {
-      console.error(err);
-      setError("❌ Failed to analyze resume. Try another file.");
-    } finally {
-      setLoading(false);
-    }
+    const res = await axios.post("http://localhost:8000/upload", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    setData(res.data);
+    setLoading(false);
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-100 via-purple-50 to-blue-100 p-8">
-      <div className="max-w-3xl mx-auto bg-white/80 backdrop-blur-md p-8 rounded-xl shadow-xl border">
-        <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">📄 Resume Analyzer</h1>
+    <main className="min-h-screen bg-gradient-to-br from-blue-100 via-white to-purple-200 py-16 px-4">
+      <div className="max-w-4xl mx-auto glass-container p-10 rounded-3xl shadow-2xl">
+        <h1 className="text-4xl font-extrabold text-center text-purple-800 mb-10">
+          🧠 AI Resume Analyzer
+        </h1>
 
         <UploadBox onUpload={handleUpload} />
-
-        {loading && <p className="mt-6 text-center text-blue-600 font-medium">Analyzing resume...</p>}
-
-        {error && <p className="mt-6 text-center text-red-500 font-medium">{error}</p>}
-
-        {result && <ResumeSummary {...result} />}
+        {loading && <p className="text-center mt-6">🔍 Analyzing your resume...</p>}
+        {data && <ResumeSummary {...data} />}
       </div>
+
+      <footer className="text-center mt-12 text-sm text-gray-500">
+        &copy; {new Date().getFullYear()} by Maryam Safdar
+      </footer>
     </main>
   );
 }

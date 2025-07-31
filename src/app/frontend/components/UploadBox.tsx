@@ -1,31 +1,31 @@
-import React, { useRef } from "react";
+// components/UploadBox.tsx
+"use client";
+
+import { useRef } from "react";
 
 export default function UploadBox({ onUpload }: { onUpload: (file: File) => void }) {
-  const inputRef = useRef<HTMLInputElement>(null);
+  const fileRef = useRef<HTMLInputElement | null>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file && file.type === "application/pdf") {
-      onUpload(file);
-    } else {
-      alert("Please upload a valid PDF file.");
-    }
+    if (file) onUpload(file);
   };
 
   return (
-    <div className="text-center">
+    <div className="border-2 border-dashed border-purple-400 p-8 rounded-xl bg-white/70 shadow-md text-center">
+      <p className="text-lg mb-3 text-gray-700">📄 Upload your PDF resume</p>
       <input
         type="file"
-        accept="application/pdf"
-        ref={inputRef}
+        accept=".pdf"
         onChange={handleFileChange}
+        ref={fileRef}
         className="hidden"
       />
       <button
-        onClick={() => inputRef.current?.click()}
-        className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg shadow-lg transition"
+        className="bg-purple-600 text-white px-5 py-2 rounded-lg hover:bg-purple-700 transition"
+        onClick={() => fileRef.current?.click()}
       >
-        📤 Upload Resume (PDF)
+        Choose File
       </button>
     </div>
   );

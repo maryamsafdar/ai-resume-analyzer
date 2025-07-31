@@ -1,4 +1,5 @@
-import React from "react";
+// components/ResumeSummary.tsx
+"use client";
 
 interface Props {
   summary: string;
@@ -8,18 +9,20 @@ interface Props {
 
 export default function ResumeSummary({ summary, suggestions, job_titles }: Props) {
   return (
-    <div className="mt-8 space-y-6 text-gray-700">
-      <div>
-        <h3 className="text-xl font-semibold text-purple-700">📝 Summary</h3>
-        <p className="mt-2">{summary}</p>
+    <div className="mt-8 space-y-6">
+      <div className="bg-white/80 border-l-4 border-purple-600 p-5 rounded-xl shadow">
+        <h2 className="text-xl font-semibold text-purple-800 mb-2">📝 Summary</h2>
+        <p className="text-gray-700">{summary}</p>
       </div>
-      <div>
-        <h3 className="text-xl font-semibold text-blue-700">🔧 Suggestions</h3>
-        <p className="mt-2">{suggestions}</p>
+
+      <div className="bg-white/80 border-l-4 border-blue-500 p-5 rounded-xl shadow">
+        <h2 className="text-xl font-semibold text-blue-800 mb-2">🔧 Suggestions</h2>
+        <p className="text-gray-700">{suggestions}</p>
       </div>
-      <div>
-        <h3 className="text-xl font-semibold text-green-700">🎯 Job Recommendations</h3>
-        <p className="mt-2">{job_titles}</p>
+
+      <div className="bg-white/80 border-l-4 border-green-500 p-5 rounded-xl shadow">
+        <h2 className="text-xl font-semibold text-green-800 mb-2">🎯 Job Recommendations</h2>
+        <p className="text-gray-700">{job_titles}</p>
       </div>
     </div>
   );
