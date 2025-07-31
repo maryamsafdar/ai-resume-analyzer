@@ -1,36 +1,151 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# 🤖 AI Resume Analyzer
 
-First, run the development server:
+An AI-powered Resume Analyzer that helps candidates:
+- Get a professional summary from their resume
+- Receive tailored improvement suggestions
+- Discover recommended job titles based on experience
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Built using:
+- 🐍 FastAPI (backend)
+- 💡 LangChain + OpenAI (LLM analysis)
+- 📄 PyMuPDF (PDF parsing)
+- ⚛️ Next.js (frontend with Tailwind CSS)
+
+---
+
+## 🧠 Features
+
+- Upload resume in PDF format
+- Extract key insights using GPT-3.5 Turbo
+- Display summary, suggestions & job recommendations
+- Modern UI with chat-like interaction
+- Fully responsive and integrated UI
+
+---
+
+## 🚀 Project Structure
+
+```
+resume-analyzer/
+├── backend/
+│   ├── main.py             # FastAPI server
+│   ├── analyze.py          # LangChain logic
+│   └── utils.py            # PDF text extraction
+│   ├── requirements.txt        
+│   └── .env                # API Key
+├── frontend/
+│   ├── pages.tsx  # Home UI
+│   ├── components/
+│   │   ├── UploadBox.tsx   # File uploader
+│   │   └── ResumeSummary.tsx # Summary display
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Setup Instructions
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 1. Clone the repo
 
-## Learn More
+```bash
+git clone https://github.com/maryamsafdar/ai-resume-analyzer
+cd ai-resume-analyzer
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 2. Backend Setup (FastAPI + LangChain)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+cd backend
+pip install -r requirements.txt
+```
 
-## Deploy on Vercel
+#### ➕ Create `.env` file
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```env
+OPENAI_API_KEY=your-openai-key-here
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+#### ➕ Start backend server
+
+```bash
+uvicorn main:app --reload
+```
+
+API will be available at: [http://localhost:8000](http://localhost:8000)
+
+---
+
+### 3. Frontend Setup (Next.js)
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Frontend runs at: [http://localhost:3000](http://localhost:3000)
+
+---
+
+## 🧪 Sample Usage
+
+Upload any professional resume (PDF), and get:
+
+- 📝 Summary  
+- 🔧 Suggestions to improve formatting/content  
+- 🎯 Job Recommendations  
+
+---
+
+## 🧰 Tech Stack
+
+- **Frontend:** Next.js, TypeScript, Tailwind CSS  
+- **Backend:** FastAPI, LangChain, OpenAI API  
+- **PDF Parsing:** PyMuPDF (fitz)  
+- **AI Model:** GPT-3.5 Turbo  
+- **Deployment Ready:** Yes (Render, Vercel, etc.)
+
+---
+
+## 🔒 Environment Variables
+
+| Key             | Description           |
+|----------------|-----------------------|
+| OPENAI_API_KEY | Your OpenAI secret key|
+
+---
+
+## 📦 Dependencies
+
+From `requirements.txt`:
+
+```txt
+fastapi
+uvicorn
+python-dotenv
+PyMuPDF
+langchain
+langchain-openai
+openai
+```
+
+---
+
+## 💡 Future Ideas
+
+- Match job descriptions with resumes
+- Support multiple file types (DOCX, etc.)
+- Multilingual resume parsing
+- Integrate with LinkedIn or GitHub
+
+---
+
+## 📬 Contact
+
+For any help or feedback, contact [Maryam Safdar](mailto:maryamsafdar453@gmail.com).
+
+---
+
